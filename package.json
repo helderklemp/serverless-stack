@@ -1,0 +1,24 @@
+{
+  "name": "serverless-stack",
+  "version": "1.0.0",
+  "description": "Simple Repo using Serverless, Node, API, Dynamo and GitHubActions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helderklemp/serverless-stack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helderklemp/serverless-stack/issues"
+  },
+  "homepage": "https://github.com/helderklemp/serverless-stack#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "serverless-http": "^1.9.1"
+  }
+}

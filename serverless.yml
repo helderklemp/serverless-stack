@@ -1,0 +1,17 @@
+# serverless.yml
+
+service: serverless-stack
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'} # Set the default stage used. Default is dev
+  region: ${opt:region, 'ap-southeast-2'}
+  environment: # Service wide environment variables
+    # serviceEnvVar: 123456789
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

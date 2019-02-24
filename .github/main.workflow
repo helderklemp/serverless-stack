@@ -8,12 +8,10 @@ action "npm install" {
 }
 
 action "new releases only" {
+  needs = ["npm install"]
   uses = "actions/bin/filter@master"
   args = "tag v*"
 }
-
-
-
 action "serverless deploy" {
   uses = "serverless/github-action@master"
   secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]

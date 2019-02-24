@@ -1,5 +1,5 @@
 workflow "Deploy with Serverless" {
-  on = "release"
+  on = "push"
   resolves = ["serverless deploy"]
 }
 

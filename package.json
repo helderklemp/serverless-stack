@@ -2,10 +2,7 @@
   "name": "serverless-stack",
   "version": "1.0.0",
   "description": "Simple Repo using Serverless, Node, API, Dynamo and GitHubActions",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/helderklemp/serverless-stack.git"
@@ -20,11 +17,18 @@
   "dependencies": {
     "express": "^4.16.4",
     "node-uuid": "^1.4.8",
+    "serverless": "^1.38.0",
     "serverless-dynamodb-client": "0.0.2",
     "serverless-http": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-strongloop": "^2.1.0",
     "serverless-dynamodb-local": "^0.2.30",
     "serverless-offline": "^4.6.0"
+  },
+  "scripts": {
+    "pretest": "eslint --ignore-path .gitignore .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

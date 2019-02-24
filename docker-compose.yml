@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  builder:
+    image: node:8-slim
+    ports:
+      - 3000:3000
+    # env_file: .env
+    volumes:
+      - .:/usr/src/app:Z
+    working_dir: /usr/src/app
+  sls:
+    image: amaysim/serverless
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app:Z
+    working_dir: /usr/src/app
+    

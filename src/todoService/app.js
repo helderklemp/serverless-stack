@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const express = require("express");
 const app= express();
 const AWS = require('aws-sdk');
-const dynamoDb = require('./dynamodb');
+const dynamoDb = require('../utils/dynamodb');
 const uuid = require('node-uuid');
 
 const { TODOS_TABLE, IS_OFFLINE } = process.env;
@@ -15,7 +15,7 @@ app.use(bodyParser.json({ strict: false }));
 
 
 app.get("/",function(req,resp){
-    resp.send("Hello World");
+    resp.send("TODO Service API");
 });
 
 app.get('/todos', (req, res) => {

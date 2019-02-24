@@ -37,8 +37,8 @@ provider:
       Resource:
         - { "Fn::GetAtt": ["TodosDynamoDBTable", "Arn" ] }
 functions:
-  app:
-    handler: index.handler
+  todo:
+    handler: src/todoService/app.handler
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
@@ -59,3 +59,11 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+Outputs:
+    TodosDynamoDBTable:
+      Value:
+         Fn::GetAtt:
+          - TodosDynamoDBTable
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-TodosDynamoDBTableArn

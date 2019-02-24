@@ -3,29 +3,28 @@
 
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
-const express = require("express");
-const app= express();
-const AWS = require('aws-sdk');
+const express = require('express');
+const app = express();
 const dynamoDb = require('../utils/dynamodb');
 const uuid = require('node-uuid');
 
-const { TODOS_TABLE, IS_OFFLINE } = process.env;
+const { TODOS_TABLE } = process.env;
 
 app.use(bodyParser.json({ strict: false }));
 
-app.get("/",function(req,resp){
-    resp.send('TODO Service API');
+app.get('/', function(req, resp){
+  resp.send('TODO Service API');
 });
 
 app.get('/todos', (req, res) => {
   const params = {
     TableName: TODOS_TABLE,
-  };   
+  };
   dynamoDb.scan(params, (error, result) => {
     if (error) {
       res.status(400).json({ error: 'Error retrieving Todos'});
     }
-    const { Items: todos } = result;  
+    const { Items: todos } = result;
     res.json({ todos });
   });
 });

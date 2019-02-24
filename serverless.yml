@@ -2,16 +2,60 @@
 
 service: serverless-stack
 
+custom:
+  tableName: 'todos-${self:provider.stage}'
+  dynamodb:
+  start:
+    port: 8000
+    inMemory: true
+    heapInitial: 200m
+    heapMax: 1g
+    migrate: true
+    seed: true
+    convertEmptyValues: true
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+    
 provider:
   name: aws
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'} # Set the default stage used. Default is dev
   region: ${opt:region, 'ap-southeast-2'}
-  environment: # Service wide environment variables
-    # serviceEnvVar: 123456789
+  environment:
+    TODOS_TABLE: ${self:custom.tableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["TodosDynamoDBTable", "Arn" ] }
 functions:
   app:
     handler: index.handler
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+resources:
+  Resources:
+    TodosDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: todoId
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: todoId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}

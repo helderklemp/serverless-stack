@@ -3,15 +3,15 @@ workflow "Deploy with Serverless" {
   resolves = ["serverless deploy"]
 }
 
-action "master branch only" {
-  uses = "actions/bin/filter@b2bea07"
-  args = "branch master"
+action "new releases only" {
+  uses = "actions/bin/filter@master"
+  args = "tag v*"
 }
 
 action "npm install" {
   uses = "actions/npm@master"
   args = "install"
-  needs = ["master branch only"]
+  needs = ["new releases only"]
 }
 
 action "serverless deploy" {

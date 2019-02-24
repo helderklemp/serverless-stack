@@ -1,6 +1,6 @@
 workflow "Project Build" {
   on = "push"
-  resolves = ["serverless deploy"]
+  resolves = ["npm test"]
 }
 action "npm install" {
   uses = "actions/npm@master"

@@ -5,7 +5,6 @@ workflow "Project Build" {
 action "npm install" {
   uses = "actions/npm@master"
   args = "install"
-  needs = ["master branch only"]
 }
 
 

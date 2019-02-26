@@ -1,7 +1,6 @@
-// index.js
+// app.js
 'use strict';
 
-const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -101,5 +100,4 @@ app.delete('/todos/:todoId', (req, res) => {
     res.json({ success: true });
   });
 });
-
-module.exports.handler = serverless(app);
+module.exports = app;

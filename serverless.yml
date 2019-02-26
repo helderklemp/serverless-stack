@@ -38,7 +38,7 @@ provider:
         - { "Fn::GetAtt": ["TodosDynamoDBTable", "Arn" ] }
 functions:
   todo:
-    handler: src/todoService/app.handler
+    handler: src/todoService/index.handler
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'

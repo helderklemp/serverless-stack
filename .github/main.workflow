@@ -8,8 +8,8 @@ action "npm install" {
 }
 action "npm lint" {
   uses = "actions/npm@master"
-  args = "run pretest"
   needs = ["npm install"]
+  args = "run pretest"
 }
 action "npm test" {
   uses = "actions/npm@master"
